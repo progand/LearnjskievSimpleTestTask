@@ -1,0 +1,61 @@
+
+<div ng-controller="MathTestCtrl">
+    <h1>Тестування знань з математики</h1>
+
+    <form name="testform" class="panel panel-default" novalidate ng-submit="testform.$valid && onSubmit()">
+        <div class="panel-heading">
+            <h3 class="panel-title">Порахуйте результат прикладу</h3>
+        </div>
+        <div class="panel-body text-center">
+            <div class="alert alert-warning" role="alert" ng-show="example===null">Для продовження потрібно вибрати хоча б одну математичну операцію в "Налаштуваннях"</div>
+            <code >{{example.question}}</code>
+        </div>
+        <div class="panel-footer">
+            <div class="form-group" ng-class="{'has-error': testform.userResult.$error.pattern, 'has-warning': testform.userResult.$error.required, 'has-success': testform.userResult.$valid}">
+                <label class="control-label" for="userResult">Відповідь: </label>
+                <input type="text" ng-model="userResult" id="userResult" name="userResult" required ng-pattern="/^[0-9]{1,7}$/" placeholder="Введіть результат" autofocus="">               
+                <input type="submit" class="btn btn-primary pull-right btn-sm" value="Перевірити">
+            </div>  
+             <div class="text-danger" ng-show="testform.userResult.$error.pattern">Підказка: вводьте тільки додаткові цілі числа</div>
+        </div>
+    </form>
+
+
+    <div role="tabpanel">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active" ><a href="#test" aria-controls="test" role="tab" data-toggle="tab">Перевірка</a></li>
+            <li role="presentation"><a href="#options" aria-controls="options" role="tab" data-toggle="tab">Налаштування</a></li>            
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="test">
+                <p>Результати:</p>
+                <ul class="list-inline">
+                    <li class="text-success">
+                        Правильні відповіді <span class="badge">{{results.correct}}</span>
+                    </li>
+                    <li class="text-danger">
+                        Неправильні відповіді <span class="badge">{{results.wrong}}</span>
+                    </li>
+                </ul> 
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="options">
+                <p>Виберіть типи завдань для тестування:</p>
+                <ul class="list-unstyled">
+                    <li ng-repeat="operation in operations">
+                        <label >
+                            <input type="checkbox" ng-model="operation.use" ng-change="loadNextExample()"> {{operation.name}}
+                        </label>
+                    </li>
+                </ul> 
+            </div>            
+        </div>
+
+    </div>
+
+</div>
+
+
