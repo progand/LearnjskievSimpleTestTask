@@ -2,6 +2,8 @@
 
 Варіант розв’язання завдання https://github.com/learnjskiev/simple-test-task
 
+Для підтримки IE8 використовуйте AngularJS 1.2, але не пізніші 1.3 і т.д. Деталі: https://docs.angularjs.org/guide/ie
+
 
 Розробка
 ============
